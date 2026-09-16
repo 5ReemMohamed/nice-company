@@ -358,3 +358,21 @@ if (backTop) {
 
 }
 
+
+const floatingPhoneBtn = document.getElementById("floatingPhoneBtn");
+const phoneOptions = document.getElementById("phoneOptions");
+
+if (floatingPhoneBtn && phoneOptions) {
+    floatingPhoneBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        phoneOptions.classList.toggle("active");
+    });
+
+    document.addEventListener("click", function () {
+        phoneOptions.classList.remove("active");
+    });
+
+    phoneOptions.addEventListener("click", function (e) {
+        e.stopPropagation();
+    });
+}
