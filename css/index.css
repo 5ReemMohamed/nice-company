@@ -165,17 +165,15 @@ a {
   justify-content: center;
   gap: 15px;
 
-  min-width: 245px;
-  height: 58px;
 
-  padding: 0 25px;
+  padding: 16px 15px;
 
   background: var(--primary-color);
   color: var(--white-color);
 
   border-radius: 40px;
 
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 700;
 
   transition: var(--transition);
@@ -253,7 +251,7 @@ a {
   backdrop-filter: blur(8px);
 }
 
-.hero-badge span {
+.hero-badge .dot {
   width: 7px;
   height: 7px;
 
@@ -541,14 +539,12 @@ a {
     max-width: 720px;
   }
 }
-
-@media (max-width: 991px) {
-  .main-navbar {
+@media screen and (max-width:1200px) {
+    .main-navbar {
     height: 95px;
   }
 
-  .desktop-menu,
-  .navbar-cta {
+  .desktop-menu{
     display: none;
   }
 
@@ -558,6 +554,9 @@ a {
     align-items: center;
     justify-content: center;
   }
+}
+@media (max-width: 991px) {
+
 
   .hero-section {
     min-height: 850px;
@@ -835,7 +834,7 @@ a {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
 }
 
-.section-badge span {
+.section-badge .dot {
   width: 7px;
   height: 7px;
 
@@ -1880,7 +1879,7 @@ a {
 
 .nice-title {
     color: var(--secondary-color);
-    font-size: clamp(34px, 4vw, 58px);
+    font-size: clamp(34px, 4vw, 50px);
     line-height: 1.35;
     font-weight: 700;
     margin-bottom: 25px;
@@ -2202,10 +2201,7 @@ a {
     flex-direction: column;
 }
 
-.contact-info span {
-    color: #777;
-    font-size: 10px;
-}
+
 
 .contact-info strong {
     direction: ltr;
@@ -6109,3 +6105,176 @@ border-radius: 60px 60px 0px 0px;
 }
 
 
+/* =========================
+   Language Switcher
+========================= */
+
+.language-switcher {
+    position: relative;
+    margin-inline: 15px;
+}
+
+.language-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 9px 14px;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+
+    font-family: "Cairo", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.language-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.language-btn .fa-chevron-down {
+    font-size: 10px;
+    transition: transform 0.3s ease;
+}
+
+.language-switcher.active .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+
+/* Dropdown */
+
+.language-dropdown {
+    position: absolute;
+
+    top: calc(100% + 10px);
+    right: 0;
+
+    min-width: 145px;
+
+    padding: 6px;
+
+    background: #fff;
+
+    border-radius: 10px;
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(-8px);
+
+    transition: all 0.25s ease;
+
+    z-index: 9999;
+}
+
+.language-switcher.active .language-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+
+.language-option {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 9px 11px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #222;
+
+    font-family: "Cairo", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.language-option:hover {
+    background: #f3f3f3;
+}
+
+.language-option .fa-check {
+    display: none;
+    font-size: 12px;
+}
+
+.language-option.active .fa-check {
+    display: block;
+}
+
+
+.language-arrow {
+  transition: transform 0.3s ease;
+}
+
+html[dir="ltr"] .language-arrow {
+  transform: rotate(180deg);
+}
+
+html[dir="rtl"] .language-arrow {
+  transform: rotate(0deg);
+}
+html[dir="ltr"] .vision-section {
+  direction: ltr;
+}
+
+html[dir="rtl"] .vision-section {
+  direction: rtl;
+}
+
+html[dir="ltr"] .vision-content {
+  text-align: left;
+}
+
+html[dir="rtl"] .vision-content {
+  text-align: right;
+}
+
+html[dir="ltr"] .vision-label {
+  flex-direction: row;
+}
+
+html[dir="rtl"] .vision-label {
+  flex-direction: row;
+}
+
+html[dir="ltr"] .vision-feature {
+  direction: ltr;
+}
+
+html[dir="rtl"] .vision-feature {
+  direction: rtl;
+}
+
+html[dir="ltr"] .vision-card {
+  direction: ltr;
+}
+
+html[dir="rtl"] .vision-card {
+  direction: rtl;
+}
+html[dir="ltr"]  .footer-column h3::after {
+right: 49px; 
+}
