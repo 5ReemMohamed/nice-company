@@ -4310,10 +4310,13 @@ input {
 .floating-whatsapp:hover {
   background: #1ebe5d;
 }
-
+.floating-instagram {
+  background: linear-gradient(45deg, #833AB4, #E4405F, #FCAF45);
+  top:-50px;
+}
 .floating-tooltip {
   position: absolute;
-  right: 65px;
+  left: 65px;
   top: 50%;
   transform: translateY(-50%);
   white-space: nowrap;
@@ -6050,8 +6053,7 @@ border-radius: 60px 60px 0px 0px;
 
 .floating-call-wrapper {
     position: fixed;
-    bottom: 90px;
-    left: 25px;
+    bottom: 80px;
     z-index: 9999;
 }
 
