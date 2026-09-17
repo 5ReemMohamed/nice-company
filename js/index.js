@@ -376,3 +376,155 @@ if (floatingPhoneBtn && phoneOptions) {
         e.stopPropagation();
     });
 }
+
+const languageSwitchers = document.querySelectorAll(".language-switcher");
+const languageOptions = document.querySelectorAll(".language-option");
+const currentLanguages = document.querySelectorAll(".current-language");
+
+let currentLang = localStorage.getItem("siteLanguage") || "ar";
+
+function setLanguage(lang) {
+
+    currentLang = lang;
+
+    const elements = document.querySelectorAll("[data-ar][data-en]");
+
+    elements.forEach(function(element) {
+
+        const text = element.getAttribute(`data-${lang}`);
+
+        if (text !== null) {
+            element.textContent = text;
+        }
+
+    });
+
+    const placeholders = document.querySelectorAll(
+        "[data-placeholder-ar][data-placeholder-en]"
+    );
+
+    placeholders.forEach(function(element) {
+
+        const placeholder = element.getAttribute(
+            `data-placeholder-${lang}`
+        );
+
+        if (placeholder !== null) {
+            element.placeholder = placeholder;
+        }
+
+    });
+
+    const altElements = document.querySelectorAll(
+        "[data-alt-ar][data-alt-en]"
+    );
+
+    altElements.forEach(function(element) {
+
+        const alt = element.getAttribute(
+            `data-alt-${lang}`
+        );
+
+        if (alt !== null) {
+            element.alt = alt;
+        }
+
+    });
+
+    const ariaElements = document.querySelectorAll(
+        "[data-aria-ar][data-aria-en]"
+    );
+
+    ariaElements.forEach(function(element) {
+
+        const ariaLabel = element.getAttribute(
+            `data-aria-${lang}`
+        );
+
+        if (ariaLabel !== null) {
+            element.setAttribute("aria-label", ariaLabel);
+        }
+
+    });
+
+    if (lang === "en") {
+
+        document.documentElement.lang = "en";
+        document.documentElement.dir = "ltr";
+
+    } else {
+
+        document.documentElement.lang = "ar";
+        document.documentElement.dir = "rtl";
+
+    }
+
+    currentLanguages.forEach(function(element) {
+
+        element.textContent =
+            lang === "en" ? "English" : "العربية";
+
+    });
+
+    languageOptions.forEach(function(option) {
+
+        option.classList.toggle(
+            "active",
+            option.dataset.lang === lang
+        );
+
+    });
+
+    localStorage.setItem("siteLanguage", lang);
+
+    languageSwitchers.forEach(function(switcher) {
+        switcher.classList.remove("active");
+    });
+
+}
+
+languageSwitchers.forEach(function(switcher) {
+
+    const button = switcher.querySelector(".language-btn");
+
+    if (!button) return;
+
+    button.addEventListener("click", function(event) {
+
+        event.stopPropagation();
+
+        languageSwitchers.forEach(function(item) {
+
+            if (item !== switcher) {
+                item.classList.remove("active");
+            }
+
+        });
+
+        switcher.classList.toggle("active");
+
+    });
+
+});
+
+languageOptions.forEach(function(option) {
+
+    option.addEventListener("click", function(event) {
+
+        event.stopPropagation();
+
+        setLanguage(option.dataset.lang);
+
+    });
+
+});
+
+document.addEventListener("click", function() {
+
+    languageSwitchers.forEach(function(switcher) {
+        switcher.classList.remove("active");
+    });
+
+});
+
+setLanguage(currentLang);
