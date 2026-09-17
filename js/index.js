@@ -528,3 +528,193 @@ document.addEventListener("click", function() {
 });
 
 setLanguage(currentLang);
+
+const contactForm = document.getElementById("contactForm");
+const successMessage = document.getElementById("successMessage");
+
+if (contactForm) {
+
+    contactForm.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        const firstName = document.getElementById("firstName");
+        const lastName = document.getElementById("lastName");
+        const email = document.getElementById("email");
+        const phone = document.getElementById("phone");
+        const message = document.getElementById("message");
+
+        const errorMessages = contactForm.querySelectorAll(".error-message");
+
+        errorMessages.forEach(function (error) {
+            error.textContent = "";
+        });
+
+        const inputs = contactForm.querySelectorAll(".form-control");
+
+        inputs.forEach(function (input) {
+            input.classList.remove("is-invalid");
+        });
+
+        let isValid = true;
+
+        function showError(input, messageText) {
+
+            input.classList.add("is-invalid");
+
+            const error = input
+                .closest(".form-group")
+                .querySelector(".error-message");
+
+            if (error) {
+                error.textContent = messageText;
+            }
+
+            isValid = false;
+        }
+
+        if (!firstName.value.trim()) {
+            showError(
+                firstName,
+                currentLang === "ar"
+                    ? "يرجى إدخال الاسم الأول"
+                    : "Please enter your first name"
+            );
+        }
+
+        if (!lastName.value.trim()) {
+            showError(
+                lastName,
+                currentLang === "ar"
+                    ? "يرجى إدخال اسم العائلة"
+                    : "Please enter your last name"
+            );
+        }
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email.value.trim()) {
+
+            showError(
+                email,
+                currentLang === "ar"
+                    ? "يرجى إدخال البريد الإلكتروني"
+                    : "Please enter your email"
+            );
+
+        } else if (!emailPattern.test(email.value.trim())) {
+
+            showError(
+                email,
+                currentLang === "ar"
+                    ? "يرجى إدخال بريد إلكتروني صحيح"
+                    : "Please enter a valid email address"
+            );
+        }
+
+        if (!phone.value.trim()) {
+
+            showError(
+                phone,
+                currentLang === "ar"
+                    ? "يرجى إدخال رقم الهاتف"
+                    : "Please enter your phone number"
+            );
+        }
+
+        if (!message.value.trim()) {
+
+            showError(
+                message,
+                currentLang === "ar"
+                    ? "يرجى كتابة رسالتك"
+                    : "Please write your message"
+            );
+        }
+
+        if (!isValid) {
+            return;
+        }
+
+      
+        const whatsappNumber = "96560381010";
+
+        let whatsappMessage = "";
+
+        if (currentLang === "ar") {
+
+            whatsappMessage =
+                "مرحباً، لدي استفسار بخصوص خدمات الأبواب والشبابيك.\n\n" +
+
+                "👤 الاسم: " +
+                firstName.value.trim() +
+                " " +
+                lastName.value.trim() +
+                "\n\n" +
+
+                "📧 البريد الإلكتروني: " +
+                email.value.trim() +
+                "\n\n" +
+
+                "📱 رقم الهاتف: " +
+                phone.value.trim() +
+                "\n\n" +
+
+                "💬 الرسالة:\n" +
+                message.value.trim();
+
+        } else {
+
+            whatsappMessage =
+                "Hello, I have an inquiry regarding your doors and windows services.\n\n" +
+
+                "👤 Name: " +
+                firstName.value.trim() +
+                " " +
+                lastName.value.trim() +
+                "\n\n" +
+
+                "📧 Email: " +
+                email.value.trim() +
+                "\n\n" +
+
+                "📱 Phone: " +
+                phone.value.trim() +
+                "\n\n" +
+
+                "💬 Message:\n" +
+                message.value.trim();
+        }
+
+        const encodedMessage =
+            encodeURIComponent(whatsappMessage);
+
+        const whatsappURL =
+            "https://wa.me/" +
+            whatsappNumber +
+            "?text=" +
+            encodedMessage;
+
+        window.open(
+            whatsappURL,
+            "_blank",
+            "noopener,noreferrer"
+        );
+
+        if (successMessage) {
+
+            successMessage.classList.add("show");
+
+            setTimeout(function () {
+                successMessage.classList.remove("show");
+            }, 5000);
+        }
+
+        contactForm.reset();
+
+    });
+
+}
+
+
